@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Doctor;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,23 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $user = array();
+        $user = auth()->user();
+        $docteur = User::where('type','docteur')->get();
+        $docteurdata = Doctor::all();
+
+        foreach($docteurdata as $data){
+            foreach($docteur as $info){
+                if($data['user_id'] == $info['id']){
+                    $data['docteur_name'] = $info['name'];
+                    $data['docteur_profile'] = $info['profile_photo_url'];
+                }
+            }
+        }
+
+        $user['docteur'] = $docteurdata;
+
+        return $user;
     }
 
 

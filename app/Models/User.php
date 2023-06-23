@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Doctor;
+use App\Models\RendezVous;
 use App\Models\UserDetail;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
@@ -69,5 +70,10 @@ class User extends Authenticatable
     public function user_details(){
 
         return $this->hasOne(UserDetail::class);
+    }
+
+    public function rendezvous(){
+
+        return $this->hasMany(RendezVous::class);
     }
 }

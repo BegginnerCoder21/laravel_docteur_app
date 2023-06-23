@@ -39,6 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             ]), function (User $user) {
                 $this->createTeam($user);
             });
+
                 $doctorInfo = Doctor::create([
                     'user_id' => $user->id,
                     'status' => 'active'
